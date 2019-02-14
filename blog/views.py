@@ -14,6 +14,33 @@ def index(request):
     return render(request, 'blog/index.html')
 
 
+# def fn(template_name):
+#     def inner(request):
+#         return render(request, template_name)
+#     return inner
+
+# index = fn('blog/index.html')
+
+# index2 = fn('blog/index2.html')
+
+
+# class MyTemplateView:
+#     @classmethod
+#     def as_view(self, template_name):
+#         def inner(request):
+#             return render(request, template_name)
+#         return inner
+
+# index = MyTemplateView.as_view('blog/index.html')
+
+
+from django.views.generic import TemplateView
+
+index = TemplateView.as_view(template_name='blog/index.html')
+
+
+
+
 def hello_times(request, times):
     message = "안녕하세요" * times
     return HttpResponse(message)
