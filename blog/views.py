@@ -90,16 +90,16 @@ def naver_blog_search(request):
 
 def 사원증_이미지_응답(request):
     # ttf_path = 'C:/Windows/Fonts/malgun.ttf' # 윈도우, 맥:
-    # ttf_path = '/Library/Fonts/AppleGothic.ttf'
+    ttf_path = '/Library/Fonts/AppleGothic.ttf'
 
     # FIXME: 각 운영체제에 맞게 경로를 설정해주세요.
     # 파일을 복사한 후에, 경로 확인 후에 적용해주세요.
     ttf_path = 'assets/fonts/AppleGothic.ttf'
 
-    text = request.GET.get('name', '익명')
+    text = request.GET.get('name', '유지곤/010-5297-1456')
     # text = '이진석 (사번: 201900001)'
 
-    image_url = 'http://www.flowermeaning.com/flower-pics/Calla-Lily-Meaning.jpg'
+    image_url = 'http://img.asiatoday.co.kr/file/2016y/07m/19d/2016071901001726200091111.jpg'
     res = requests.get(image_url) # 서버로 HTTP GET 요청하여, 응답 획득
 
     io = BytesIO(res.content) # 응답의 Raw Body  메모리 파일 객체 BytesIO 인스턴스 생성
@@ -108,14 +108,14 @@ def 사원증_이미지_응답(request):
     font = ImageFont.truetype(ttf_path, 40) # 지정 경로의 TrueType 폰트, 폰트크기 40
     draw = ImageDraw.Draw(canvas) # canvas에 대한 ImageDraw 객체 획득
 
-    left, top = 10, 10
+    left, top = 5, 5
     margin = 10
     width, height = font.getsize(text)
     right = left + width + margin
     bottom = top + height + margin
 
     draw.rectangle((left, top, right, bottom), (255, 255, 224))
-    draw.text((15,15), text, font=font, fill=(20, 20, 20))
+    draw.text((10,10), text, font=font, fill=(20, 20, 20))
 
     # canvas.show()  # 뷰에서는 필요가 없어서, 주석처리
 
