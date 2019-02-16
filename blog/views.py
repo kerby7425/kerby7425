@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 import requests
+import random
 from bs4 import BeautifulSoup
 from io import BytesIO
 from PIL import Image, ImageDraw, ImageFont
@@ -122,3 +123,12 @@ def 사원증_이미지_응답(request):
     response = HttpResponse(content_type='image/png')
     canvas.save(response, format='PNG')    # HttpResponse 의 file-like 특성 활용
     return response
+
+def lotto_suggestions(request):
+    html_list = []
+    for i in range(1,6):
+        lotto_list = random.sample(range(1,46), 6)
+        lotto_list.sort()
+        html = "<br><html><body> Suggestion {} : %s</body></html></br>".format(i) % lotto_list
+        html_list.append(html)
+    return HttpResponse(html_list)
